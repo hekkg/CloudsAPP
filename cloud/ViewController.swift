@@ -23,14 +23,48 @@ class ViewController: UIViewController {
                         print("解出key為orgin的值")
                         print(value)
                     }
-                    if let value1 = dictionary["url"] as? String{
+                    if let value = dictionary["url"] as? String{
                         print("解出key為url的值")
-                        print(value1)
+                        print(value)
                     }
-//                    if let value2 = dictionary["args"] as? String{
-//                        print("解出key為headers的值")
-//                        print(value2)
-//                    }
+                    if let headers_dictionary = dictionary["headers"] as? [String:Any]{
+                        if let value = headers_dictionary["Accept"] as? String{
+                            print("解出key為Accept的值")
+                            print(value)
+                        
+                        }
+                        if let value = headers_dictionary["Connection"] as? String{
+                            print("解出key為Connection的值")
+                            print(value)
+                            
+                        }
+                        if let value = headers_dictionary["Accept-Encoding"] as? String{
+                            print("解出key為Accept-Encoding的值")
+                            print(value)
+                            
+                        }
+                        if let value = headers_dictionary["Accept-Language"] as? String{
+                            print("解出key為Accept-Language的值")
+                            print(value)
+                            
+                        }
+                        if let value = headers_dictionary["Host"] as? String{
+                            print("解出key為Host的值")
+                            print(value)
+                            
+                        }
+                        if let value = headers_dictionary["User-Agent"] as? String{
+                            print("解出key為User-Agent的值")
+                            print(value)
+                            
+                        }
+                        
+                       
+                    }
+                    if let value = dictionary["args"] as? String{
+                        print("解出key為args的值")
+                        print(value)
+                    }
                     
                 }
                 
