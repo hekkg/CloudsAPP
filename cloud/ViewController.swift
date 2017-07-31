@@ -8,26 +8,26 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         Alamofire.request("https://api.github.com/users/octocat/repos").responseJSON{response in
             //更符合內容的命名變數名稱為 result_value
-            if let result_value = response.result.value{
-            
+            guard let result_value = response.result.value
+                else{
+                    return
+                }
+
+
+
 //                for (key,value) in dictionary {
 //                    if let value_string = value as? String {
 //                        print(key + ":" + value_string)
 //                    }
-//                    
 //                }
-                
-                
                 //print(result_value)
+//              if let result_value = response.result.value{
                 if let array = result_value as? [Any]{ //將result_value 解讀為任何型態的 陣列
-                    
                     for JSON_OBJECT in array {
-                    
                     //if let JSON_OBJECT = array.first{ //將陣列的第一個JSON物件 做解析
                         if let dictionary = JSON_OBJECT as? [String:Any]{//將JSON 物件轉成key-value陣列
                             if let value = dictionary["id"] as? Int{
                                 print("ID:\(value)")
-                            
                             }
                             if let value = dictionary["name"] as? String{
                                 print("name: \(value)")
@@ -35,21 +35,15 @@ class ViewController: UIViewController {
                             if let value = dictionary["private"] as? Bool{
                                 print("private: \(value)")
                             }
-                            if let value = dictionary["homepage"] as? Any?{
-                                print("homepage: \(value!)")//不知道原始陣列之下的格式處理
+                            if let value = dictionary["homepage"] as? String{
+                                print("homepage: \(value)")
+                            }else{
+                                print("homepage:null")//不知道原始陣列之下的格式處理
                             }
-                        
-//                            for (key,value) in dictionary {
-//                                if let value_string = value as? String {
-//                                    print(key + ":" + value_string)
-//                                }
-//
-//                            }
                         }
                     }
                 }
-            }
-            
+//            }
         }
         
 //        
