@@ -14,27 +14,45 @@ class ViewController: UIViewController {
                     return
             }
             for JSON_OBJECT in array {//將陣列的第一個JSON物件 做解析
-
-                guard let dictionary = JSON_OBJECT as? [String:Any]
-                    //value陣列
+                guard let dictionary = JSON_OBJECT as? [String:Any] //將JSON物件轉成key-value陣列
                     else{
                         return
                 }
+                for (key,value) in dictionary{
+                    switch value{
+                    case is Int:
+                        print("\(key):\(value)(Int)")
+                    case is String:
+                        print("\(key):\(value)(String)")
+                    case is Bool:
+                        print("\(key):\(value)(Bool)")
+                    default:
+                        print("\(key):(unknown type)")
+                    }
+                
+                }
 
-                if let value = dictionary["id"] as? Int{
-                    print("ID:\(value)")
-                }
-                if let value = dictionary["name"] as? String{
-                    print("name: \(value)")
-                }
-                if let value = dictionary["private"] as? Bool{
-                    print("private: \(value)")
-                }
-                if let value = dictionary["homepage"] as? String{
-                    print("homepage: \(value)")
-                }else{
-                    print("homepage:null")//不知道原始陣列之下的格式處理
-                }
+//                guard let value = dictionary["id"] as? Int
+//                else{
+//                    return
+//                }
+//                
+//                print("ID:\(value)")
+                
+//                if let value = dictionary["id"] as? Int{
+//                    print("ID:\(value)")
+//                }
+//                if let value = dictionary["name"] as? String{
+//                    print("name: \(value)")
+//                }
+//                if let value = dictionary["private"] as? Bool{
+//                    print("private: \(value)")
+//                }
+//                if let value = dictionary["homepage"] as? String{
+//                    print("homepage: \(value)")
+//                }else{
+//                    print("homepage:null")//不知道原始陣列之下的格式處理
+//                }
             }
         }
         
