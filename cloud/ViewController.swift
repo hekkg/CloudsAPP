@@ -1,125 +1,35 @@
+//
+//  ViewController.swift
+//  CloudsAPP
+//
+//  Created by mike on 2017/7/24.
+//  Copyright © 2017年 mike. All rights reserved.
+//
 
 import UIKit
 import Alamofire
 
 class ViewController: UIViewController {
-
+    var apiGithubComJsonsGloss: [ApiGithubComJsonGloss] = []//用來放 completion 傳來的資料
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        Alamofire.request("https://api.github.com/users/octocat/repos").responseJSON{response in
-            //更符合內容的命名變數名稱為 result_value
-            guard let result_value = response.result.value,
-                let array = result_value as? [Any] //將result_value解讀為任何型態資的陣列
-                else{
-                    return
-            }
-            for JSON_OBJECT in array {//將陣列的第一個JSON物件 做解析
-
-                guard let dictionary = JSON_OBJECT as? [String:Any]
-                    //value陣列
-                    else{
-                        return
-                }
-
-                if let value = dictionary["id"] as? Int{
-                    print("ID:\(value)")
-                }
-                if let value = dictionary["name"] as? String{
-                    print("name: \(value)")
-                }
-                if let value = dictionary["private"] as? Bool{
-                    print("private: \(value)")
-                }
-                if let value = dictionary["homepage"] as? String{
-                    print("homepage: \(value)")
-                }else{
-                    print("homepage:null")//不知道原始陣列之下的格式處理
-                }
-            }
-        }
+        // Do any additional setup after loading the view, typically from a nib.
         
-//
-//        Alamofire.request("https://httpbin.org/get").responseJSON{response in
-////            print(response.request as Any)
-////            print(response.response as Any)
-////            print(response.data as Any)
-////            print(response.result)
-//            
-//            if let ARRAY = response.result.value {
-//                print("準備印出result中的資料")
-//                print(ARRAY)
-//                
-//            }
-//            if let JSON = response.result.value {
-//                if let dictionary = JSON as? [String:Any]{
-//                    if let value = dictionary["origin"] as? String{
-//                        print("解出key為orgin的值")
-//                        print(value)
-//                    }
-//                    if let value = dictionary["url"] as? String{
-//                        print("解出key為url的值")
-//                        print(value)
-//                    }
-//                    if let headers_dictionary = dictionary["headers"] as? [String:Any]{
-//                        
-//                        for (key,value) in headers_dictionary {
-//                            if let value_string = value as? String {
-//                                print(key + ":" + value_string)
-//                            }
-//                        }
-//                        
-////                        
-////                        if let value = headers_dictionary["Accept"] as? String{
-////                            print("解出key為Accept的值")
-////                            print(value)
-////                        
-////                        }
-////                        if let value = headers_dictionary["Connection"] as? String{
-////                            print("解出key為Connection的值")
-////                            print(value)
-////                            
-////                        }
-////                        if let value = headers_dictionary["Accept-Encoding"] as? String{
-////                            print("解出key為Accept-Encoding的值")
-////                            print(value)
-////                            
-////                        }
-////                        if let value = headers_dictionary["Accept-Language"] as? String{
-////                            print("解出key為Accept-Language的值")
-////                            print(value)
-////                            
-////                        }
-////                        if let value = headers_dictionary["Host"] as? String{
-////                            print("解出key為Host的值")
-////                            print(value)
-////                            
-////                        }
-////                        if let value = headers_dictionary["User-Agent"] as? String{
-////                            print("解出key為User-Agent的值")
-////                            print(value)
-////                            
-////                        }
-//                        
-//                       
-//                    }
-//                    if let value = dictionary["args"] as? String{
-//                        print("解出key為args的值")
-//                        print(value)
-//                    }
-//                    
-//                    
-//                }
-//                
-//            }
-//
-//        }
+        //希望重構程式到用以下一行即可處理 JSON 的取得
+        //使用這個方法時，其實物件還沒初始化
+        ApiGithubComJsonGloss.fetch(){ dataTransfer in//completion 將資料傳過來
+            self.apiGithubComJsonsGloss = dataTransfer//將資料放在這個類別中
+//            print("fetch() 完成後")
+            print(self.apiGithubComJsonsGloss)
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-   
+        // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
 
